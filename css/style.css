@@ -84,13 +84,27 @@ h1 {
     justify-content: space-between;
 }
 
-.add-order {
+.add-order,
+.del-order {
     font-size: 20px;
-    padding: 5px 30px;
+    padding: 3px 20px;
     background-color: rgb(219, 244, 58);
     border-radius: 3px;
     border: 0;
     cursor: pointer;
+    transition: .3s ease;
+}
+
+.add-order:hover {
+    background-color: rgb(188, 213, 22);
+}
+
+.del-order {
+    background-color: #BD1D1D;
+    margin-left: 5px;
+}
+.del-order:hover {
+    background-color: #a40909;
 }
 
 

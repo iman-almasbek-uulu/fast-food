@@ -14,8 +14,12 @@ function drawProducts() {
         let img = document.createElement("img");
         let h4 = document.createElement("h4");
         let div = document.createElement("div");
+        let div2 = document.createElement("div");
         let p = document.createElement("p");
+        let span = document.createElement("span");
+        let span2 = document.createElement("span");
         let button = document.createElement("button");
+        let buttondel = document.createElement("button");
 
 
         li.setAttribute("class","product_item")
@@ -23,16 +27,32 @@ function drawProducts() {
         div.setAttribute("class","block")
         p.setAttribute("class","price")
         button.setAttribute("class","add-order")
+        buttondel.setAttribute("class","del-order")
 
         h4.innerText = el.name
-        p.innerText = el.price
+        span.innerText = el.price
+        span2.innerText = "$"
         img.src = el.img
         button.innerText = "to order"
+        buttondel.innerText = "delete"
 
-        if (el.selected === true) button.style.background = "green"
+        if (el.selected === true) {
+            button.style.background = " #8cff2e"
+            button.addEventListener('mouseover', () => {
+                button.style.backgroundColor = 'gray';
+            });
+              
+            button.addEventListener('mouseout', () => {
+                button.style.backgroundColor = '#8cff2e';
+            });
+        } 
 
         div.append(p)
-        div.append(button)
+        p.append(span)
+        p.append(span2)
+        div.append(div2)
+        div2.append(button)
+        div2.append(buttondel)
         li.append(img)
         li.append(h4)
         li.append(div)
@@ -42,7 +62,20 @@ function drawProducts() {
         button.addEventListener("click", () => {
             add(i)
         })
+        buttondel.addEventListener("click", () => {
+            del(i)
+        })
     });
+}
+
+function del(i) {
+    let products = JSON.parse(localStorage.getItem("productsOrder")) || [];
+    let product = JSON.parse(localStorage.getItem("products")) || [];
+    product.splice(i,1);
+    products = products.filter(el => el.index !== i)
+    localStorage.setItem("products", JSON.stringify(product))
+    localStorage.setItem("productsOrder", JSON.stringify(products))
+    drawProducts()
 }
 
 
